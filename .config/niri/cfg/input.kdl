@@ -1,0 +1,50 @@
+// ────────────── Input Configuration ──────────────
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+
+input {
+    keyboard {
+        xkb {
+            //If you want to overwrite your keyboard layout,
+            // uncomment the line below and change the layout accordingly.
+            //layout "us" // Use the American keyboard layout
+        }
+        numlock // Enable numlock on startup
+    }
+
+    touchpad {
+        tap // Enable tap-to-click
+        natural-scroll // Enable natural (macOS-style) scrolling
+        
+        // 1. Acceleration Profile
+        // "adaptive" uses a heavy deceleration curve for micro-movements.
+        // Switching to "flat" provides 1:1 linear tracking with zero initial lag.
+        accel-profile "flat"
+
+        // 2. Pointer Speed
+        // Range: -1.0 to 1.0 (default is 0.0). Increase if the cursor feels too slow.
+        accel-speed 0.25
+
+        // 3. Disable-While-Typing (DWT)
+        // If your cursor briefly refuses to move after typing or resting your hands,
+        // comment out or disable dwt:
+        // dwt
+
+        // 4. Scroll Sensitivity
+        // Multiplier for two-finger scrolling (default is 1.0)
+        scroll-factor 1.0
+
+        // 5. Click Method
+        // "clickfinger": 1 finger = left, 2 fingers = right, 3 fingers = middle
+        click-method "clickfinger"
+    }
+
+    mouse {
+        // If you want to disable Mouse Acceleration,
+        // uncomment the lines below.
+        //accel-profile "flat"
+        //accel-speed 0.0
+    }
+
+    focus-follows-mouse // Automatically focus windows under the mouse pointer
+    workspace-auto-back-and-forth // Enable workspace back & forth switching
+}
