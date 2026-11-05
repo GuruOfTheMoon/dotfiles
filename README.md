@@ -12,9 +12,8 @@ My Wayland rice on CachyOS: **niri** (scrollable tiling) + **Noctalia** shell.
 | `.config/fish/` | fish shell config and functions |
 | `.config/micro/` | micro editor settings |
 | `.config/mimeapps.list` | default applications |
-| `.local/bin/` | `app-manager` (pacman/AUR/web-app TUI) and `launch-webapp` |
+| `.local/bin/` | `app-manager` (pacman/AUR/web-app TUI), `display-manager` (Win+P-style display TUI) and `launch-webapp` |
 | `.bashrc`, `.zshrc`, `.profile`, … | shell startup files |
-| `.gitconfig` | git identity |
 
 ## Install
 
@@ -24,7 +23,14 @@ Back up the existing files first, then copy or symlink them into `$HOME`:
 git clone https://github.com/GuruOfTheMoon/dotfiles.git
 cp -a dotfiles/.config dotfiles/.local ~/
 cp -a dotfiles/.bashrc dotfiles/.bash_profile dotfiles/.profile \
-      dotfiles/.zshrc dotfiles/.zshenv dotfiles/.gitconfig ~/
+      dotfiles/.zshrc dotfiles/.zshenv ~/
+```
+
+Set your own git identity (the repo intentionally ships no `.gitconfig`):
+
+```sh
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
 ```
 
 Install the script dependencies:
@@ -36,7 +42,7 @@ sudo pacman -S --needed gum fzf desktop-file-utils
 Then make the scripts executable if your copy did not preserve the mode:
 
 ```sh
-chmod +x ~/.local/bin/app-manager ~/.local/bin/launch-webapp
+chmod +x ~/.local/bin/app-manager ~/.local/bin/display-manager ~/.local/bin/launch-webapp
 ```
 
 `app-manager` also needs a Chromium/Firefox browser for the web-app feature.
@@ -54,6 +60,18 @@ install -Dm755 dotfiles/.local/bin/{app-manager,launch-webapp} ~/.local/bin/
 AUR install/remove options additionally need `paru` or `yay`.
 
 Log out and back in (or restart niri) to apply.
+
+## Display menu (`Super+P`)
+
+`display-manager` opens a Windows `Win+P`-style TUI. Pick a display connected via
+HDMI or DisplayPort, then:
+
+- extend it left/right/above/below another monitor
+- mirror another display onto it with `wl-mirror` (offered for installation on first use)
+- use only that display, or turn it off
+- change resolution/refresh rate, rotation, scale and VRR
+
+The menu is available on `Super+P`; `Super+Shift+P` still turns the monitors off.
 
 ## Not included
 
