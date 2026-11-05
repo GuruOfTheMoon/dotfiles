@@ -28,6 +28,11 @@ fi
 PROFILE_DIR="$HOME/.local/share/web-apps/$APP_SLUG"
 mkdir -p "$PROFILE_DIR"
 
+if ! command -v "$BROWSER" &>/dev/null; then
+  echo "No supported browser found. Install chromium, brave, google-chrome-stable, or firefox." >&2
+  exit 1
+fi
+
 if [[ "$BROWSER" == "firefox" ]]; then
   exec firefox --new-window "$APP_URL"
 else
