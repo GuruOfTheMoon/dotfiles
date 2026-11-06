@@ -36,7 +36,7 @@ git config --global user.email "you@example.com"
 Install the script dependencies:
 
 ```sh
-sudo pacman -S --needed gum fzf jq desktop-file-utils
+sudo pacman -S --needed gum fzf jq curl file desktop-file-utils
 ```
 
 Then make the scripts executable if your copy did not preserve the mode:
@@ -49,15 +49,32 @@ chmod +x ~/.local/bin/app-manager ~/.local/bin/display-manager ~/.local/bin/laun
 
 ### app-manager only
 
-To use the package manager on another Arch/CachyOS machine without the rest of the rice:
+To use the package and web-app manager on another Arch/CachyOS machine without the rest of the rice:
 
 ```sh
 git clone https://github.com/GuruOfTheMoon/dotfiles.git
-sudo pacman -S --needed gum fzf
+sudo pacman -S --needed gum fzf curl file desktop-file-utils
 install -Dm755 dotfiles/.local/bin/{app-manager,launch-webapp} ~/.local/bin/
 ```
 
-AUR install/remove options additionally need `paru` or `yay`.
+AUR install/remove options additionally need `paru` or `yay`, and the web-app feature needs a Chromium/Firefox browser.
+
+Optional niri integration:
+
+```kdl
+Mod+Alt+Space {
+    spawn "alacritty" "--class" "app-manager" "-e" "sh" "-c" "$HOME/.local/bin/app-manager";
+}
+
+window-rule {
+    match app-id="app-manager"
+    open-floating true
+    default-column-width { proportion 0.60; }
+    default-window-height { proportion 0.70; }
+}
+```
+
+The standalone version of this tool lives at [GuruOfTheMoon/arch-app-manager](https://github.com/GuruOfTheMoon/arch-app-manager).
 
 ### display-manager only
 
