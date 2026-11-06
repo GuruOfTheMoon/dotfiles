@@ -36,7 +36,7 @@ git config --global user.email "you@example.com"
 Install the script dependencies:
 
 ```sh
-sudo pacman -S --needed gum fzf desktop-file-utils
+sudo pacman -S --needed gum fzf jq desktop-file-utils
 ```
 
 Then make the scripts executable if your copy did not preserve the mode:
@@ -58,6 +58,35 @@ install -Dm755 dotfiles/.local/bin/{app-manager,launch-webapp} ~/.local/bin/
 ```
 
 AUR install/remove options additionally need `paru` or `yay`.
+
+### display-manager only
+
+To use the Win+P-style display menu on another niri machine without the rest of the rice:
+
+```sh
+git clone https://github.com/GuruOfTheMoon/dotfiles.git
+sudo pacman -S --needed gum fzf jq
+install -Dm755 dotfiles/.local/bin/display-manager ~/.local/bin/
+```
+
+Add the `Mod+P` keybind and the floating-window rule to your niri config:
+
+```kdl
+Mod+P hotkey-overlay-title="Open Display Menu: Mirror / Extend" {
+    spawn "alacritty" "--class" "display-manager" "-e" "sh" "-c" "$HOME/.local/bin/display-manager";
+}
+
+window-rule {
+    match app-id="display-manager"
+    open-floating true
+    default-column-width { fixed 820; }
+    default-window-height { fixed 640; }
+}
+```
+
+Reload niri with `niri msg action load-config-file`. Mirroring additionally needs `wl-mirror` (`sudo pacman -S --needed wl-mirror`); the script offers to install it on first use.
+
+The standalone version of this tool lives at [GuruOfTheMoon/niri-display-manager](https://github.com/GuruOfTheMoon/niri-display-manager).
 
 Log out and back in (or restart niri) to apply.
 
