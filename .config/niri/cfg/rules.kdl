@@ -44,21 +44,6 @@
         }
     }
     
-    window-rule {
-    match app-id="app-manager"
-    open-floating true
-    default-column-width { proportion 0.60; }
-    default-window-height { proportion 0.70; }
-    }
-
-    // Floating Win+P-style display menu.
-    window-rule {
-    match app-id="display-manager"
-    open-floating true
-    default-column-width { fixed 820; }
-    default-window-height { fixed 640; }
-    }
-
     layer-rule {
     match namespace="notifications"
     // stellt sicher, dass Klicks durchkommen

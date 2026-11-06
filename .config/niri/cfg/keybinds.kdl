@@ -164,8 +164,4 @@ binds {
     Mod+Shift+P                         { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
     Mod+O                               repeat=false { toggle-overview; }
 
-    // ─── Display Menu (Windows-style Win+P) ───
-    Mod+P                               hotkey-overlay-title="Open Display Menu: Mirror / Extend" { spawn "alacritty" "--class" "display-manager" "-e" "sh" "-c" "$HOME/.local/bin/display-manager"; }
-   
-    Mod+Alt+Space                         { spawn "alacritty" "--class" "app-manager" "-e" "sh" "-c" "$HOME/.local/bin/app-manager"; }
 }
